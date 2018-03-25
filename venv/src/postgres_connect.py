@@ -1,9 +1,10 @@
 import psycopg2
 import psycopg2.extensions
 import json,select
+from config import config
 class PostgresOps:
     def __init__(self):
-        self.conn = psycopg2.connect(dbname="testopesto", user="emirozbir", password=" ")
+        self.conn = psycopg2.connect(dbname="{}".format(config['db']), user="{}".format(config['username']),password="{}".format(config['passwd']))
         self.conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
         self.curs = self.conn.cursor()
 
@@ -21,6 +22,8 @@ class PostgresOps:
                     json_data = json.loads(notify.payload)
                     print(json_data['salary'])
 
-
-#obj = PostgresOps()
-#obj.start_listening(channel_name="test")
+    def test_connection(self,db,username,passwd):
+        try:
+            conn = psycopg2.connect(dbname=db, user=username,password=passwd)
+        except Exception as exp:
+            print(exp)
