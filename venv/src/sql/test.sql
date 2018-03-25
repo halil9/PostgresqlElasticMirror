@@ -1,16 +1,16 @@
-CREATE OR REPLACE FUNCTION notify_CHANNEL_NAME()
+CREATE OR REPLACE FUNCTION notify_asd()
   RETURNS trigger AS $$
 DECLARE
 BEGIN
   PERFORM pg_notify(
-    CAST('notify_CHANNEL_NAME' AS text),
+    CAST('notify_asd' AS text),
     row_to_json(NEW)::text);
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 
-CREATE TRIGGER notify_CHANNEL_NAME
+CREATE TRIGGER notify_asd
   AFTER INSERT ON TABLE_NAME
   FOR EACH ROW
-  EXECUTE PROCEDURE notify_CHANNEL_NAME();
+  EXECUTE PROCEDURE notify_asd();
