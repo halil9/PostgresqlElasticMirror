@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extensions
 import json,select
 from config import config
+from ..elastic import *
 class PostgresOps:
     def __init__(self):
         self.conn = psycopg2.connect(dbname="{}".format(config['db']), user="{}".format(config['username']),password="{}".format(config['passwd']))
