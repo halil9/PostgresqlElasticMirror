@@ -2,7 +2,7 @@ import psycopg2
 import psycopg2.extensions
 import json,select
 from config import config
-from ..elastic import *
+from elastic import mirror_to_elastic
 class PostgresOps:
     def __init__(self):
         self.conn = psycopg2.connect(dbname="{}".format(config['db']), user="{}".format(config['username']),password="{}".format(config['passwd']))
@@ -23,8 +23,5 @@ class PostgresOps:
                     json_data = json.loads(notify.payload)
                     print(json_data['salary'])
 
-    def test_connection(self,db,username,passwd):
-        try:
-            conn = psycopg2.connect(dbname=db, user=username,password=passwd)
-        except Exception as exp:
-            print(exp)
+
+
