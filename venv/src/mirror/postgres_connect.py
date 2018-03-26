@@ -13,7 +13,7 @@ class PostgresOps:
     def start_listening(self,channel_name):
         self.curs.execute("LISTEN {}".format(channel_name))
         print "Waiting for notification {}".format(channel_name)
-        while 1:
+        while True:
             if select.select([self.conn],[],[],5) == ([],[],[]):
                 pass
             else:
@@ -21,6 +21,7 @@ class PostgresOps:
                 while self.conn.notifies:
                     notify = self.conn.notifies.pop(0)
                     json_data = json.loads(notify.payload)
+                    mirror_to_elastic(db_name=config['db'],table_name=channel_name,data=json_data)
                     print(json_data['salary'])
 
 
