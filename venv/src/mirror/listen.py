@@ -4,7 +4,7 @@ from postgres_connect import PostgresOps
 parser = argparse.ArgumentParser()
 parser.add_argument("--cn", "-c",help="Channel name of communicate with postgresql")
 args = parser.parse_args()
-channel_name = args.cn
+channel_name = args.cn###CHANEL_NAME is Doc name of Index 
 
 if channel_name != None or channel_name != '' :
     obj = PostgresOps()
