@@ -1,0 +1,1 @@
+config = {'username': 'emirozbir', 'passwd': '', 'db': 'testopesto'}
