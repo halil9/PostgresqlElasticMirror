@@ -1,0 +1,11 @@
+CREATE OR REPLACE FUNCTION pg_delete() RETURNS TRIGGER AS $_$
+BEGIN
+DELETE FROM company WHERE company.id=OLD.company_id;
+RETURNS OLD;
+END  $_$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER delete_content
+AFTER DELETE ON company
+FOR EACH ROW
+ECXECUTE PROCEDURE pg_delete();
+
